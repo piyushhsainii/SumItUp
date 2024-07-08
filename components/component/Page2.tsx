@@ -1,50 +1,27 @@
-"use client"
 import Link from "next/link"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar"
-import Loader from "@/components/Loader"
-import { useState } from "react"
-import axios from "axios"
-
 
 export default function page2() {
-
-  const [Loading, setLoading] = useState(0)
-  const [VideoUrl, setVideoUrl] = useState("")
-  const [GeneratedText, setGeneratedText] = useState<string | null>(null)
-
-  const getSummary = async () => {
-    console.log("ok")
-    // if (VideoUrl !== "") {
-    try {
-      setLoading(1)
-      const { data } = await axios.post('/api/convert', { VideoUrl })
-      if (data) {
-        setGeneratedText(data.response)
-        setLoading(2)
-      }
-    } catch (error) {
-      setLoading(3)
-    }
-    // }
-  }
-
   return (
     <div className="flex flex-col min-h-[100dvh]">
       <header className="px-4 lg:px-6 h-14 flex items-center">
-        <Link href="/" className="flex items-center justify-center" prefetch={false}>
-          SUM IT UP
+        <Link href="#" className="flex items-center justify-center" prefetch={false}>
+          <XIcon className="h-6 w-6" />
           <span className="sr-only">Video Summary AI</span>
         </Link>
         <nav className="ml-auto flex gap-4 sm:gap-6">
-          <Link href="#features" className="text-sm font-medium hover:underline underline-offset-4" prefetch={false}>
+          <Link href="#" className="text-sm font-medium hover:underline underline-offset-4" prefetch={false}>
             Features
           </Link>
-          <Link href="/pricing" className="text-sm font-medium hover:underline underline-offset-4" prefetch={false}>
+          <Link href="#" className="text-sm font-medium hover:underline underline-offset-4" prefetch={false}>
             Pricing
           </Link>
-          <Link href="/contact" className="text-sm font-medium hover:underline underline-offset-4" prefetch={false}>
+          <Link href="#" className="text-sm font-medium hover:underline underline-offset-4" prefetch={false}>
+            About
+          </Link>
+          <Link href="#" className="text-sm font-medium hover:underline underline-offset-4" prefetch={false}>
             Contact
           </Link>
         </nav>
@@ -65,7 +42,7 @@ export default function page2() {
                 </div>
                 <div className="flex flex-col gap-2 min-[400px]:flex-row">
                   <Link
-                    href="#youtube"
+                    href="#"
                     className="inline-flex h-10 items-center justify-center rounded-md bg-primary px-8 text-sm font-medium text-primary-foreground shadow transition-colors hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50"
                     prefetch={false}
                   >
@@ -80,15 +57,13 @@ export default function page2() {
                   </Link>
                 </div>
               </div>
-              <div className="rounded-lg">
-                <img
-                  src="/Ref1.jpeg"
-                  width="550"
-                  height="550"
-                  alt="Hero"
-                  className="mx-auto  border-4 border-black  aspect-video overflow-hidden rounded-lg object-cover sm:w-full lg:order-last"
-                />
-              </div>
+              <img
+                src="/placeholder.svg"
+                width="550"
+                height="550"
+                alt="Hero"
+                className="mx-auto aspect-video overflow-hidden rounded-xl object-cover sm:w-full lg:order-last"
+              />
             </div>
           </div>
         </section>
@@ -118,10 +93,10 @@ export default function page2() {
                     3. Get a concise summary of the key points
                   </p>
                 </div>
-                <div className="flex gap-4">
-                  <Input onChange={(e) => setVideoUrl(e.target.value)} type="text" id="youtube" placeholder="Enter YouTube URL" className="max-w-lg flex-1" />
-                  <button onClick={() => getSummary()} style={{ backgroundColor: "black", color: "white", borderRadius: "100px" }} className="px-4 py-2 " >Summarize</button>
-                </div>
+                <form className="flex gap-2">
+                  <Input type="text" placeholder="Enter YouTube URL" className="max-w-lg flex-1" />
+                  <Button type="submit">Summarize</Button>
+                </form>
               </div>
               <div className="flex flex-col justify-center space-y-4">
                 <div className="space-y-2">
@@ -129,19 +104,12 @@ export default function page2() {
                   <p className="text-muted-foreground">The AI-generated summary will be displayed here.</p>
                 </div>
                 <div className="bg-background p-4 rounded-lg">
-
-                  {
-                    Loading == 1 ?
-                      <Loader /> :
-                      Loading == 2 ?
-                        ` ${GeneratedText} `
-                        :
-                        Loading == 3 ?
-                          <div style={{ color: "red" }} >
-                            ERROR OCCURED WHILE GENERATING SUMMARY
-                          </div> :
-                          null
-                  }
+                  <p>
+                    This video discusses the latest advancements in artificial intelligence and how they are being used
+                    to summarize YouTube videos. The key points covered include the underlying technology, the benefits
+                    of using AI for video summarization, and some real-world examples of how this technology is being
+                    applied.
+                  </p>
                 </div>
               </div>
             </div>
@@ -151,7 +119,7 @@ export default function page2() {
           <div className="container px-4 md:px-6">
             <div className="flex flex-col items-center justify-center space-y-4 text-center">
               <div className="space-y-2">
-                <div className="inline-block rounded-lg bg-muted px-3 py-1 text-sm" id="features">Features</div>
+                <div className="inline-block rounded-lg bg-muted px-3 py-1 text-sm">Features</div>
                 <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl">
                   Powerful Features to Summarize Videos
                 </h2>
